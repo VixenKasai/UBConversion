@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UBConversion"
         mc:Ignorable="d"
-        Title="EUP -> UB Convertion Utility" Height="475 " Width="1200">
+        Title="EUP -> UB Conversion Utility" Height="475 " Width="1200">
     <Grid x:Name="Frame">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50*"/>

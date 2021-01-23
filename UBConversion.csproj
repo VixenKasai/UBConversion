@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Win32Resource></Win32Resource>
+    <ApplicationIcon>EUPUBlogo.ico</ApplicationIcon>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="images\Bejoijo.png" />
+    <None Remove="images\efox.png" />
+    <None Remove="images\EUPUBlogo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="images\Bejoijo.png" />
+    <Resource Include="images\efox.png" />
+    <Resource Include="images\EUPUBlogo.png" />
+  </ItemGroup>
+
+</Project>

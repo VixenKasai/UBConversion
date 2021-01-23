@@ -4,7 +4,7 @@ This utility easily converts EUP-styled uniform configs to be used with
 BejoIjo Corp.'s Ultimate Backup LSPDFR plugin.
 
 Utility Support: https://discord.gg/PmmWAka
-Utiloty GitHub: https://github.com/VixenKasai/UBConversion
+Utility GitHub: https://github.com/VixenKasai/UBConversion
 BejoIjo Support: https://discord.gg/et8wFat
 
 Instructions:

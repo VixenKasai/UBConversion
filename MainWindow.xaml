@@ -5,34 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UBConversion"
         mc:Ignorable="d"
-        Title="MainWindow" Height="475 " Width="1200">
+        Title="EUP -> UB COnvertion Utility" Height="475 " Width="1200">
     <Grid x:Name="Frame">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="151*"/>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="101*"/>
             <ColumnDefinition Width="21*"/>
             <ColumnDefinition Width="1028*"/>
         </Grid.ColumnDefinitions>
-        <Image x:Name="BejoIjoImage" HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" VerticalAlignment="Top" Width="100">
+        <Image x:Name="BejoIjoImage" HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" VerticalAlignment="Top" Width="100" Grid.ColumnSpan="2">
             <Image.Source>
                 <BitmapImage DecodePixelWidth="500" UriSource="/images/Bejoijo.png"/>
             </Image.Source>
         </Image>
-        <Image x:Name="EfoxImage" HorizontalAlignment="Left" Height="100" Margin="566,10,0,0" VerticalAlignment="Top" Width="100" Grid.Column="2">
+        <Image x:Name="EfoxImage" HorizontalAlignment="Left" Height="100" Margin="566,10,0,0" VerticalAlignment="Top" Width="100" Grid.Column="3">
             <Image.Source>
                 <BitmapImage DecodePixelWidth="500" UriSource="/images/efox.png"/>
             </Image.Source>
         </Image>
-        <Label x:Name="TitleBox" Content="EUP to UB Ped Conversion Tool" HorizontalAlignment="Left" Margin="34,31,0,0" VerticalAlignment="Top" Width="504" FontSize="36" Grid.Column="2"/>
-        <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Left" Margin="921,404,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2" Click="ExitButton_Click"/>
-        <Button x:Name="ResetButton" Content="Reset" HorizontalAlignment="Left" Margin="221,292,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2" Click="ResetButton_Click"/>
-        <Button x:Name="HelpButton" Content="Help" HorizontalAlignment="Left" Margin="22,404,0,0" VerticalAlignment="Top" Width="76" Click="HelpButton_Click"/>
-        <Label Content="Instructions" Grid.Column="2" HorizontalAlignment="Left" Margin="828,13,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="Instructions" Grid.Column="2" HorizontalAlignment="Left" Margin="732,0,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Center" Width="264" Height="317" Loaded="Instructions_Loaded" IsReadOnly="True"/>
-        <TextBox x:Name="eupInput" Grid.ColumnSpan="3" HorizontalAlignment="Left" Margin="22,152,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="258" Height="224" TextChanged="eupInput_TextChanged" AutomationProperties.IsRequiredForForm="True" AcceptsReturn="True"/>
-        <Label x:Name="eupLabel" Content="EUP / Emergency Uniforms Pack" HorizontalAlignment="Left" Margin="60,121,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3"/>
-        <TextBox x:Name="ubInput" HorizontalAlignment="Left" Margin="408,152,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="258" Height="224" Grid.Column="2"/>
-        <Label x:Name="ubLabel" Content="UB / Ultimate Backup" HorizontalAlignment="Left" Margin="477,121,0,0" VerticalAlignment="Top" Grid.Column="2"/>
-        <CheckBox x:Name="nameChkBox" Content="Put Uniform Name in converted text" Grid.Column="2" HorizontalAlignment="Left" Margin="153,214,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="convertButton" Content="Convert" Grid.Column="2" HorizontalAlignment="Left" Margin="221,254,0,0" VerticalAlignment="Top" Width="75" Click="convertButton_Click"/>
+        <Label x:Name="TitleBox" Content="EUP to UB Ped Conversion Tool" HorizontalAlignment="Left" Margin="34,31,0,0" VerticalAlignment="Top" Width="504" FontSize="36" Grid.Column="3"/>
+        <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Left" Margin="921,404,0,0" VerticalAlignment="Top" Width="75" Grid.Column="3" Click="ExitButton_Click"/>
+        <Button x:Name="ResetButton" Content="Reset" HorizontalAlignment="Left" Margin="221,292,0,0" VerticalAlignment="Top" Width="75" Grid.Column="3" Click="ResetButton_Click"/>
+        <Button x:Name="HelpButton" Content="Help" HorizontalAlignment="Left" Margin="22,404,0,0" VerticalAlignment="Top" Width="76" Click="HelpButton_Click" Grid.ColumnSpan="2"/>
+        <Label Content="Instructions" Grid.Column="3" HorizontalAlignment="Left" Margin="828,13,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="Instructions" Grid.Column="3" HorizontalAlignment="Left" Margin="732,0,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Center" Width="264" Height="317" Loaded="Instructions_Loaded" IsReadOnly="True"/>
+        <TextBox x:Name="eupInput" Grid.ColumnSpan="4" HorizontalAlignment="Left" Margin="22,152,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="258" Height="224" TextChanged="eupInput_TextChanged" AutomationProperties.IsRequiredForForm="True" AcceptsReturn="True"/>
+        <Label x:Name="eupLabel" Content="EUP / Emergency Uniforms Pack" HorizontalAlignment="Left" Margin="10,121,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3" Grid.Column="1"/>
+        <TextBox x:Name="ubInput" HorizontalAlignment="Left" Margin="408,152,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="258" Height="224" Grid.Column="3"/>
+        <Label x:Name="ubLabel" Content="UB / Ultimate Backup" HorizontalAlignment="Left" Margin="477,121,0,0" VerticalAlignment="Top" Grid.Column="3"/>
+        <CheckBox x:Name="nameChkBox" Content="Put Uniform Name in converted text" Grid.Column="3" HorizontalAlignment="Left" Margin="153,214,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="convertButton" Content="Convert" Grid.Column="3" HorizontalAlignment="Left" Margin="221,254,0,0" VerticalAlignment="Top" Width="75" Click="convertButton_Click"/>
     </Grid>
 </Window>

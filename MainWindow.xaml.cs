@@ -117,7 +117,7 @@ namespace UBConversion {
 
                 //Build the string and trim it to remove the trailing whitespace before assigning the ped model and closing the tag
                 string allComps = builder.ToString().Trim();
-                string genderType = gender.ToLower().Equals("female") ? "MP_F_FREEMODE" : "MP_M_FREEMODE";
+                string genderType = gender.ToLower().Equals("female") ? "MP_F_FREEMODE_01" : "MP_M_FREEMODE_01";
                 allComps += (">" + genderType + "</Ped>");
 
                 //return the completed translation to be output to the user

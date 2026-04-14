@@ -1,0 +1,331 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UB Conversion Tool</title>
+<style>
+:root {
+--bg-color: #0f172a;
+--surface-color: #1e293b;
+--text-primary: #f8fafc;
+--text-secondary: #94a3b8;
+--accent-color: #3b82f6;
+--accent-hover: #2563eb;
+--border-color: #334155;
+--input-bg: #0f172a;
+}
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body { 
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+        background-color: var(--bg-color);
+        color: var(--text-primary);
+        padding: 2rem 1rem;
+        line-height: 1.5;
+        display: flex;
+        justify-content: center;
+    }
+
+    .app-container {
+        background-color: var(--surface-color);
+        max-width: 900px;
+        width: 100%;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        border: 1px solid var(--border-color);
+    }
+
+    h2 {
+        margin-bottom: 1.5rem;
+        font-size: 1.75rem;
+        font-weight: 600;
+        text-align: center;
+        color: var(--text-primary);
+        letter-spacing: -0.025em;
+    }
+
+    .instructions { 
+        white-space: pre-wrap; 
+        background: var(--bg-color); 
+        color: var(--text-secondary);
+        padding: 1.25rem; 
+        border-radius: 8px; 
+        margin-bottom: 2rem;
+        font-size: 0.9rem;
+        border-left: 4px solid var(--accent-color);
+    }
+
+    .grid { 
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem; 
+    }
+
+    @media (min-width: 768px) {
+        .grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .col { 
+        display: flex; 
+        flex-direction: column; 
+    }
+
+    label {
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        color: var(--text-secondary);
+    }
+
+    textarea { 
+        height: 250px; 
+        resize: vertical; 
+        margin-bottom: 1rem; 
+        background-color: var(--input-bg);
+        color: var(--text-primary);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 0.75rem;
+        font-family: "Fira Code", Consolas, Monaco, monospace;
+        font-size: 0.85rem;
+        transition: border-color 0.2s ease;
+    }
+
+    textarea:focus {
+        outline: none;
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+    }
+
+    .checkbox-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+    }
+
+    input[type="checkbox"] {
+        cursor: pointer;
+        width: 1.1rem;
+        height: 1.1rem;
+        accent-color: var(--accent-color);
+    }
+
+    .buttons { 
+        display: flex; 
+        gap: 0.75rem; 
+    }
+
+    button {
+        flex: 1;
+        background-color: var(--border-color);
+        color: var(--text-primary);
+        border: none;
+        padding: 0.6rem 1rem;
+        border-radius: 6px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-size: 0.9rem;
+    }
+
+    button:hover {
+        background-color: #475569;
+    }
+
+    button.primary {
+        background-color: var(--accent-color);
+    }
+
+    button.primary:hover {
+        background-color: var(--accent-hover);
+    }
+</style>
+</head>
+<body>
+  <div class="app-container">
+    <h2>UB Conversion Tool</h2>
+    
+    <div id="Instructions" class="instructions"></div>
+
+    <div class="grid">
+        <div class="col">
+            <label for="eupInput">EUP Input:</label>
+            <textarea id="eupInput" placeholder="Paste your EUP code here..."></textarea>
+            
+            <label class="checkbox-wrapper">
+                <input type="checkbox" id="nameChkBox"> Include Name
+            </label>
+
+            <div class="buttons">
+                <button class="primary" onclick="convertButton_Click()">Convert</button>
+                <button onclick="reset()">Reset</button>
+            </div>
+        </div>
+
+        <div class="col">
+            <label for="ubInput">UB Output:</label>
+            <textarea id="ubInput" readonly placeholder="Output will appear here..."></textarea>
+            
+            <div class="buttons">
+    <button class="primary" onclick="copyButton_Click()" id="copyBtn">Copy to Clipboard</button>
+</div>
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+    // Translations for UB -- DO NOT TOUCH --
+    const translations = {
+        "Gender": "",
+        "Hat": 'prop_hats="!" tex_hats="$"',
+        "Glasses": 'prop_glasses="!"',
+        "Ear": 'prop_ears="!"',
+        "Watch": 'prop_watches="!"',
+        "Mask": 'comp_beard="!"',
+        "Top": 'comp_shirtoverlay="!" tex_shirtoverlay="$"',
+        "UpperSkin": 'comp_shirt="!" tex_shirt="$"',
+        "Decal": 'comp_decals="!" tex_decals="$"',
+        "UnderCoat": 'comp_accessories="!" tex_accessories="$"',
+        "Pants": 'comp_pants="!" tex_pants="$"',
+        "Shoes": 'comp_shoes="!" tex_shoes="$"',
+        "Accessories": 'comp_eyes="!" tex_eyes="$"',
+        "Armor": 'comp_tasks="!" tex_tasks="$"',
+        "Parachute": 'comp_hands="!" tex_hands="$"'
+    };
+
+    // Initialize instructions on load
+    window.onload = function() {
+        const instructionsText = "1) Make an EUP outfit in-game and save it! (Make it a name you'll remember)\n" +
+            "2) Go to GTAV\\Plugins\\EUP\\wardrobe.ini and find the section of the outfit you just made\n" +
+            "3) Copy it and paste into the \"EUP Input\" section\n" +
+            "4) Click \"Convert\" and copy the output from the \"UB Output\" section!\n" +
+            "5) Place the text into your \"SpecialUnits\" or \"CustomRegions\" file wherever you want that ped to show up!\n" +
+            "6) Don't forget your 'ped_chance=\"X\"' where applicatable\n" +
+            "7) Enjoy!";
+        
+        document.getElementById("Instructions").innerText = instructionsText;
+        
+        // Replicate the text changed event
+        document.getElementById("eupInput").addEventListener('input', function() {
+            document.getElementById("ubInput").value = "";
+        });
+    };
+
+            function copyButton_Click() {
+            const outputText = document.getElementById("ubInput").value;
+            const copyBtn = document.getElementById("copyBtn");
+
+            // Don't try to copy if the box is empty
+            if (!outputText) return; 
+
+            // Use the modern Clipboard API
+            navigator.clipboard.writeText(outputText).then(() => {
+                // Temporarily change the button text to show it worked
+                copyBtn.innerText = "Copied!";
+                copyBtn.style.backgroundColor = "#10b981"; // Gives it a nice success green color
+                
+                // Change it back after 2 seconds
+                setTimeout(() => {
+                    copyBtn.innerText = "Copy to Clipboard";
+                    copyBtn.style.backgroundColor = ""; // Resets to the CSS variable
+                }, 2000);
+            }).catch(err => {
+                // Fallback just in case clipboard access is denied
+                alert("Failed to copy. Please manually select and copy the text.");
+                console.error('Error copying text: ', err);
+            });
+        }
+
+
+    function reset() {
+        document.getElementById("eupInput").value = "";
+        document.getElementById("ubInput").value = "";
+        document.getElementById("nameChkBox").checked = false;
+    }
+
+    function convertButton_Click() {
+        const input = document.getElementById("eupInput").value;
+        const includeName = document.getElementById("nameChkBox").checked;
+        const output = convertInput(input, includeName);
+        document.getElementById("ubInput").value = output;
+    }
+
+    function convertInput(input, includeName) {
+        if (!input.trim()) return "";
+        
+        try {
+            let components = {};
+            const lines = input.split('\n');
+
+            // Populate the component dictionary
+            for (let line of lines) {
+                if (!line.includes("=")) continue;
+                
+                let parts = line.split("=");
+                let key = parts[0].trim();
+                
+                if (!(key in translations)) continue; 
+                
+                let value = parts[1].split('\r')[0]; 
+                components[key] = value.trim();
+            }
+
+            if (!components["Gender"]) {
+                throw new Error("KeyNotFoundException");
+            }
+
+            // Find and save gender, then remove it as it is not a component
+            let gender = components["Gender"];
+            delete components["Gender"];
+
+            let builder = ""; 
+
+            // Include a comment in the output containing the name if the user desires
+            if (includeName) {
+                const regex = /(\[.+\])/;
+                const match = input.split('\n')[0].match(regex);
+                if (match && match[0]) {
+                    builder += "\n";
+                }
+            }
+
+            builder += "<Ped ";
+
+            // Modify the tag with appropriate components
+            for (let key in components) {
+                let modelParts = components[key].split(":");
+                let model = modelParts[0] ? modelParts[0].trim() : "";
+                let texture = modelParts[1] ? modelParts[1].trim() : "";
+
+                let type = translations[key].replace("!", model).replace("$", texture);
+                builder += type + " ";
+            }
+
+            let allComps = builder.trim();
+            let genderType = gender.toLowerCase() === "female" ? "MP_F_FREEMODE_01" : "MP_M_FREEMODE_01";
+            
+            allComps += (">" + genderType + "</Ped>");
+            return allComps;
+
+        } catch (error) {
+            alert("Invalid EUP Form detected! Please check your input!");
+            reset();
+            return "";
+        }
+    }
+</script>
+</body>
+</html>

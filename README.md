@@ -1,5 +1,5 @@
 # NEW: EUP.HTML FILE
-Download the EUO.HTML file (its the only one you need) and it will now run in your web browser. Simply open the file with your web browser and enjoy!
+Download the EUP.HTML file (its the only one you need) and it will now run in your web browser. Simply open the file with your web browser and enjoy!
 
 # DESKTOP APP
 You may continue to use the desktop version of the app by downloading the .rar file from this repo and installing via the install wizard. Windows WILL flag as potentially malicious, because this program does not contain any security certificates. I assure you that the program is safe (you may also check the code for yourself). You can click "Run Anyway" to continue using the app. However, I strongly suggest migrating to the WebApp version mentioned above as it requires no install and is quite lightweight, and will run on any device with a modern web browser. 

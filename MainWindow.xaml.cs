@@ -79,6 +79,8 @@ namespace UBConversion {
                 foreach (string str in input.Split("\n")) {
                     if (!str.Contains("=")) continue;
                     string[] parts = str.Split("=");
+                    if (!translations.ContainsKey(parts[0])) continue; // is it a valid UB component
+                    parts[1] = parts[1].Split("\r")[0]; // fix gender bug because of CRLF
                     components.Add(parts[0], parts[1]);
                 }
 
@@ -94,7 +96,7 @@ namespace UBConversion {
                 if (includeName) {
                     Regex regex = new Regex("(\\[.+\\])", RegexOptions.Compiled);
                     string uniformName = regex.Matches(input.Split("\n")[0])[0].Value;
-                    builder.Append("<!-- " + uniformName + " --> ");
+                    builder.Append("<!-- " + uniformName + " -->\n");
                 }
 
                 //open the tag
@@ -135,6 +137,7 @@ namespace UBConversion {
         //translations for UB -- DO NOT TOUCH --
         public static Dictionary<string, string> populateTranslations() {
             Dictionary<string, string> translations = new Dictionary<string, string>();
+            translations.Add("Gender", "");
             translations.Add("Hat", "prop_hats=\"!\" tex_hats=\"$\"");
             translations.Add("Glasses", "prop_glasses=\"!\"");
             translations.Add("Ear", "prop_ears=\"!\"");
